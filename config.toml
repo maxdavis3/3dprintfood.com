@@ -18,7 +18,7 @@ description   = "3D Print Food — multi-material food printing for haute cuisin
 keywords      = "3D food printing, food additive manufacturing, edible printing, chocolate printing, personalized nutrition, food tech, haute cuisine, food innovation, food R&D"
 logoEmoji     = "🍽️"
 contactEmail  = "maxdavisgroup@gmail.com"
-ogImage       = "/images/01_chocolate_extrusion.png"
+ogImage       = "/images/03_multicolor_food.png"
 footerServicesLabel = "Services"
 
 colorPrimary      = "#ff2d87"
