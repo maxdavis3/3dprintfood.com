@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The latest research, product launches, and industry news from the food 3D printing and culinary technology field.">
-  <meta property="og:title" content="Food Printing Research &amp; News | 3D Print Food">
-  <meta property="og:description" content="The latest research, product launches, and industry news from the food 3D printing and culinary technology field.">
+  <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta property="og:title" content="{{ .Title }} | {{ .Site.Title }}">
+  <meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
   <meta property="og:type" content="website">
-  <title>Food Printing Research &amp; News | 3D Print Food</title>
+  <title>{{ .Title }} | {{ .Site.Title }}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -29,17 +29,17 @@
   .article-content img { max-width: 100%; border-radius: var(--radius); margin: 1.5rem 0; }
   </style>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  
-  <meta property="og:image" content="https://3dprintfood.com/images/01_chocolate_extrusion.png">
+  {{ $og := ((.Params.image | default .Site.Params.ogImage) | absURL) }}
+  <meta property="og:image" content="{{ $og }}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://3dprintfood.com/images/01_chocolate_extrusion.png">
+  <meta name="twitter:image" content="{{ $og }}">
 </head>
 <body>
 
 <header class="ed-header">
   <div class="ed-header-inner">
     <a href="/" class="ed-logo">
-      3D&nbsp;PRINT&nbsp;<span class="ed-logo-accent">FOOD</span>
+      {{ .Site.Params.logoHtml | default .Site.Params.siteName | safeHTML }}
     </a>
     <button class="ed-nav-toggle" aria-label="Menu" onclick="document.querySelector('.ed-nav').classList.toggle('open')">&#9776;</button>
     <nav class="ed-nav">
@@ -55,33 +55,18 @@
 </header>
 
 <div class="ed-breadcrumbs">
-  <a href="/">Home</a> <span>/</span> Articles
+  <a href="/">Home</a> <span>/</span> {{ block "breadcrumb" . }}Articles{{ end }}
 </div>
 
 <main>
-  
-<div class="ed-content">
-  <div class="ed-section">
-    <div class="ed-section-label">
-      All Articles
-      <a href="/">Back to News &rarr;</a>
-    </div>
-
-    
-    <div style="text-align: center; padding: 4rem 0;">
-      <p style="color: var(--text-dim); font-size: 1.1rem;">Articles coming soon. Check back for metal 3D printing insights.</p>
-    </div>
-    
-  </div>
-</div>
-
+  {{ block "main" . }}{{ end }}
 </main>
 
 <footer class="ed-footer">
   <div class="ed-footer-inner">
     <div class="ed-footer-brand">
-      <div class="ed-logo">3D&nbsp;PRINT&nbsp;<span class="ed-logo-accent">FOOD</span></div>
-      <p>3D Print Food — multi-material food printing for haute cuisine, personalized nutrition, and food tech R&amp;D. Chocolate, sugar, puree, and gel deposition at culinary precision. Part of the PrintWire network.</p>
+      <div class="ed-logo">{{ .Site.Params.logoHtml | default .Site.Params.siteName | safeHTML }}</div>
+      <p>{{ .Site.Params.description }} Part of the PrintWire network.</p>
     </div>
     <div>
       <h4>Navigation</h4>
@@ -112,7 +97,7 @@
     </div>
   </div>
   <div class="ed-footer-bottom">
-    <div>&copy; 2026 3D Print Food. Part of the <a href="https://3dprint.space">PrintWire</a> network.</div>
+    <div>&copy; 2026 {{ .Site.Params.siteName }}. Part of the <a href="https://3dprint.space">PrintWire</a> network.</div>
     <div>
       <a href="#">Privacy</a>
       <a href="#">Terms</a>
@@ -121,7 +106,7 @@
 </footer>
 
 <script>
-
+// Theme toggle
 (function() {
   var btn = document.getElementById('themeToggle');
   var root = document.documentElement;

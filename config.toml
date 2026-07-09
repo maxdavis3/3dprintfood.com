@@ -1,9 +1,18 @@
 baseURL = "https://3dprintfood.com/"
 languageCode = "en-us"
 title = "3D Print Food"
-theme = "printwire"
+
+[outputs]
+  home = ["HTML", "JSON"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
 
 [params]
+siteName      = "3D Print Food"
+logoHtml      = '3D&nbsp;PRINT&nbsp;<span class="ed-logo-accent">FOOD</span>'
 tagline       = "Where Gastronomy Meets Technology."
 description   = "3D Print Food — multi-material food printing for haute cuisine, personalized nutrition, and food tech R&D. Chocolate, sugar, puree, and gel deposition at culinary precision."
 keywords      = "3D food printing, food additive manufacturing, edible printing, chocolate printing, personalized nutrition, food tech, haute cuisine, food innovation, food R&D"
